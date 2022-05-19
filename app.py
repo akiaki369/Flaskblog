@@ -17,9 +17,10 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False,
         default=datetime.now(pytz.timezone("Asia/Tokyo")))
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    posts = Post.query.all()
+    return render_template("index.html", posts=posts)
 
 @app.route("/article1")
 def article1():
